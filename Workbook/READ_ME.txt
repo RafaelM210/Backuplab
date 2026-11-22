@@ -1,0 +1,1 @@
+Original course workbook preserved unchanged. Module 07 paired activity is PDF page 14; individual lab is PDF page 15. These are physical PDF page numbers and printed page labels. The Week 7 lecture notes use the same timing, targets and five acceptance checks.

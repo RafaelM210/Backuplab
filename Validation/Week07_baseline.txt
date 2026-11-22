@@ -1,0 +1,5 @@
+PASS two real data assets resolve with valid distinct IDs
+PASS starter inventory API works
+PASS starter stack boundary works
+PASS starter default inventory and checkpoint usable
+Failures: 0

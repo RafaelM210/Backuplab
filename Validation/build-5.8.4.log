@@ -1,0 +1,85 @@
+Using bundled DotNet SDK version: 10.0 win-x64
+Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" BackpackLabEditor Win64 Development -Project=C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab/BackpackLab.uproject -WaitMutex -NoHotReloadFromIDE
+Log file: C:\Users\arbel\AppData\Local\UnrealBuildTool\Log.txt
+Determining max actions to execute in parallel (6 physical cores, 12 logical cores)
+  Executing up to 6 processes, one per physical core
+UbaServer - Listening on 0.0.0.0:1345
+Creating makefile for BackpackLabEditor (no existing makefile)
+UHT compiled-in object format Default
+Building BackpackLabEditor...
+===== Toolchain Information =====
+Using ISPC compiler (D:\UEFN\UE_5.8\Engine\Source\ThirdParty\Intel\ISPC\bin\Windows\ispc.exe)
+  Intel(r) Implicit SPMD Program Compiler (Intel(r) ISPC), 1.24.0 (build commit  @ 20250404, LLVM 18.1.2) 
+Using Visual Studio 2022 14.44.35229 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207) and Windows 10.0.26100.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+===== End Toolchain Information =====
+Using Unreal Build Accelerator local executor to run 18 action(s)
+  CPU 6 physical cores, 12 logical cores
+  Memory 31.84 GB physical, 33.64 GB/45.69 GB committed
+  UBA Storage capacity 40 GB
+[1/18] Compile Resource [x64] Default.rc2
+[2/18] Compile Resource [x64] Default.rc2
+[3/18] Compile [x64] SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.cpp
+[4/18] Compile [x64] BackpackLab.cpp
+[5/18] Compile [x64] BackpackState.cpp
+[6/18] Compile [x64] BackpackMode.cpp
+[7/18] Compile [x64] BackpackWidget.cpp
+[8/18] Compile [x64] Module.BackpackLab.gen.cpp
+[9/18] Compile [x64] PerModuleInline.gen.cpp
+[10/18] Link [x64] UnrealEditor-BackpackLab.lib
+[11/18] Link [x64] UnrealEditor-BackpackLab.dll
+[12/18] Compile [x64] BackpackLabEditor.cpp
+[13/18] Compile [x64] Module.BackpackLabEditor.gen.cpp
+[14/18] Compile [x64] PerModuleInline.gen.cpp
+[15/18] Compile [x64] Week07EditorLibrary.cpp
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(92,44): warning C4305: 'argument': truncation from 'double' to 'float'
+  BG->SetBrushColor(FLinearColor(.025,.055,.075,1));BG->SetPadding(FMargin(30));Size->AddChild(BG);
+                                           ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(92,39): warning C4305: 'argument': truncation from 'double' to 'float'
+  BG->SetBrushColor(FLinearColor(.025,.055,.075,1));BG->SetPadding(FMargin(30));Size->AddChild(BG);
+                                      ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(92,34): warning C4305: 'argument': truncation from 'double' to 'float'
+  BG->SetBrushColor(FLinearColor(.025,.055,.075,1));BG->SetPadding(FMargin(30));Size->AddChild(BG);
+                                 ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(94,32): warning C4305: 'argument': truncation from 'double' to 'float'
+  const FLinearColor White(.94,.97,1),Mint(.3,.95,.72),Muted(.65,.77,.81);
+                               ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(94,28): warning C4305: 'argument': truncation from 'double' to 'float'
+  const FLinearColor White(.94,.97,1),Mint(.3,.95,.72),Muted(.65,.77,.81);
+                           ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(94,51): warning C4305: 'argument': truncation from 'double' to 'float'
+  const FLinearColor White(.94,.97,1),Mint(.3,.95,.72),Muted(.65,.77,.81);
+                                                  ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(94,47): warning C4305: 'argument': truncation from 'double' to 'float'
+  const FLinearColor White(.94,.97,1),Mint(.3,.95,.72),Muted(.65,.77,.81);
+                                              ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(94,44): warning C4305: 'argument': truncation from 'double' to 'float'
+  const FLinearColor White(.94,.97,1),Mint(.3,.95,.72),Muted(.65,.77,.81);
+                                           ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(94,70): warning C4305: 'argument': truncation from 'double' to 'float'
+  const FLinearColor White(.94,.97,1),Mint(.3,.95,.72),Muted(.65,.77,.81);
+                                                                     ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(94,66): warning C4305: 'argument': truncation from 'double' to 'float'
+  const FLinearColor White(.94,.97,1),Mint(.3,.95,.72),Muted(.65,.77,.81);
+                                                                 ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(94,62): warning C4305: 'argument': truncation from 'double' to 'float'
+  const FLinearColor White(.94,.97,1),Mint(.3,.95,.72),Muted(.65,.77,.81);
+                                                             ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(106,53): warning C4305: 'argument': truncation from 'double' to 'float'
+    Button->SetBackgroundColor(FLinearColor(.11,.28,.32));
+                                                    ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(106,49): warning C4305: 'argument': truncation from 'double' to 'float'
+    Button->SetBackgroundColor(FLinearColor(.11,.28,.32));
+                                                ^
+C:\Users\arbel\Documents\Codex\2026-10-18\fin\work\week07\blueprints\Week_07_Starter\BackpackLab\Source\BackpackLabEditor\Week07EditorLibrary.cpp(106,45): warning C4305: 'argument': truncation from 'double' to 'float'
+    Button->SetBackgroundColor(FLinearColor(.11,.28,.32));
+                                            ^
+[16/18] Link [x64] UnrealEditor-BackpackLabEditor.lib
+[17/18] Link [x64] UnrealEditor-BackpackLabEditor.dll
+[18/18] WriteMetadata BackpackLabEditor.target [NoUba]
+
+Total time in Unreal Build Accelerator local executor: 116.55 seconds
+Output binary: D:\UEFN\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe
+
+Result: Succeeded
+Total execution time: 132.54 seconds
+Trace written to file C:\Users\arbel\AppData\Local\UnrealBuildTool\Trace.uba with size 18.9kb

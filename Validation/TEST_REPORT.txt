@@ -1,0 +1,16 @@
+WEEK 7 BLUEPRINT UI UPDATE -- NOVEMBER 9 2026 -- UNREAL 5.8.4
+Both final and starter native modules compiled successfully.
+Five teaching Blueprint assets compiled without Blueprint errors.
+Widget has ten real OnClicked graphs and ten Designer buttons.
+Final rules, async disk write, separate-process read and Widget event tests pass.
+See Week07_rules.txt, Week07_write.txt, Week07_read.txt and Week07_widget.txt
+in the final solution for actual assertions. Starter baseline verifies only
+the provided inventory scaffolding; four persistence TODOs remain unfinished.
+The live Content Drawer was inspected and displays the assets and C++ classes.
+The actual Widget Designer was opened, compiled successfully and saved.
+Restored standard engine plugin defaults after reproducing a Designer crash
+under the earlier overly restrictive plugin configuration. This configuration
+is present in both delivered .uproject files.
+Native C++ retains inventory/persistence rules. Blueprint UI and orchestration
+are editable. Cooked/shipping builds and a full Module 6 integration are outside
+this package. Existing manual saves are preserved in the updated live project.

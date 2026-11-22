@@ -1,0 +1,6 @@
+Workbook case,Expected,Actual inventory,Actual checkpoint,Result message,Pass or Fail,Evidence path and steps
+1 Restart load,Cell 4; Key 1; LabDoor after close/relaunch/L,,,,,
+2 Missing save,Cell 4; Start; explicit missing-file result,,,,,
+3 Unknown ID,Entire old live state unchanged; rejection,,,,,
+4 Version 1,Cell 2; Key 1; Start; next snapshot version 2,,,,,
+5 Future version,Entire old live state unchanged; rejection,,,,,

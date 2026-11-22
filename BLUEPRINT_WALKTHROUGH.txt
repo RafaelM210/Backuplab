@@ -1,0 +1,58 @@
+WEEK 7 BLUEPRINT WALKTHROUGH -- UNREAL ENGINE 5.8.4
+
+CONTENT DRAWER
+Open Content > Week07 > Blueprints.
+The update explicitly enables Unreal's asset and class Content Browser sources.
+If you want the native classes too, use Content Drawer Settings > Show C++ Classes.
+
+WBP_BackpackDashboard
+  Designer: editable layout, inventory/checkpoint/status text, ten real buttons.
+  Graph: ten OnClicked events, each connected to Get Backpack State and a
+  Blueprint-callable operation such as Add Item, Save, Load, or Fixture.
+  Click a button in Designer, then its OnClicked event to jump to its graph.
+  Native parent BackpackWidget refreshes text through state/status delegates.
+  Save and Load buttons disable during an async write and re-enable on completion.
+
+BP_BackpackController
+  Event BeginPlay calls Show Dashboard.
+  Class Defaults > Week 7 > UI assigns WBP_BackpackDashboard.
+  Keyboard shortcuts remain in its native parent and match the button labels.
+
+BP_BackpackMode
+  Class Defaults > Player Controller Class assigns BP_BackpackController.
+  Project configuration selects this Blueprint as the default GameMode.
+
+BP_BackpackState
+  Blueprint subclass of the native GameInstance.
+  Class Defaults > Week 7 > Catalog references DA_Item_Cell and DA_Item_Key.
+  Class Defaults > Week 7 > Persistence assigns BP_BackpackSave.
+  Inventory getters return value snapshots; UI changes use controlled API calls.
+  Get Backpack State in the widget exposes Add Item, Remove Item, Set Checkpoint,
+  Toggle Checkpoint, Defaults, Build Snapshot, Validate And Migrate, Apply Snapshot,
+  Save, Load and Fixture to Blueprint graphs.
+
+BP_BackpackSave
+  Blueprint subclass of the native SaveGame schema.
+  Inherited editable fields: SaveVersion, CheckpointId and Inventory.
+  The snapshot builder instantiates this configured class in the final solution.
+
+Content > Week07 also includes the two item Data Assets and L_BackpackLab.
+
+WHAT STUDENTS IMPLEMENT
+The starter retains the same four C++ LAB blocks in BackpackState.cpp:
+snapshot creation, validation/migration, async save initiation, and safe loading.
+The Blueprint UI and provided inventory API work before those TODOs are complete.
+This is a C++ persistence lab with editable Blueprint UI and orchestration.
+It is not a Blueprint-only rewrite of inventory and save validation.
+
+TESTING
+Build.ps1 -EngineRoot YOUR_ENGINE_PATH
+Verify.ps1 -EngineRoot YOUR_ENGINE_PATH -Baseline   (untouched starter only)
+Verify.ps1 -EngineRoot YOUR_ENGINE_PATH             (completed solution)
+The final verifier includes real Widget Blueprint OnClicked delegate execution,
+visible-text checks, async button state, inventory boundary tests, and a disk
+write followed by a new-process read. Tests use separate lab-only save slots.
+
+WORKBOOK
+Original workbook PDF page 14: paired activity, 50 minutes.
+Original workbook PDF page 15: independent lab, 60 minutes, five acceptance cases.

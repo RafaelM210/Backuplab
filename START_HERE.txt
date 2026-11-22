@@ -1,0 +1,29 @@
+WEEK 7 -- BLUEPRINT UI EDITION -- UNREAL ENGINE 5.8.4
+
+Open BackpackLab.uproject and L_BackpackLab. Click Play and use either mouse
+buttons or keyboard shortcuts. The dashboard is WBP_BackpackDashboard.
+Content Drawer: Content > Week07 > Blueprints.
+Double-click WBP_BackpackDashboard. Designer edits the layout. Graph contains
+the ten actual OnClicked events connected to inventory/save functions.
+Read BLUEPRINT_WALKTHROUGH.txt for the full asset and native-code map.
+
+Blueprints: WBP_BackpackDashboard, BP_BackpackController, BP_BackpackMode,
+BP_BackpackState (GameInstance) and BP_BackpackSave (SaveGame).
+Item data assets and level remain under Content/Week07.
+Native C++ still implements the validated inventory and persistence core.
+This is a hybrid teaching project, not a Blueprint-only lab.
+
+Build.ps1 -EngineRoot 'D:\UEFN\UE_5.8' (or your own engine location)
+Open.ps1 -EngineRoot YOUR_ENGINE_PATH
+Play.ps1 -EngineRoot YOUR_ENGINE_PATH
+Verify.ps1 -EngineRoot YOUR_ENGINE_PATH
+Compilation needs Visual Studio 2022 C++ tools and a Windows SDK.
+Final verifier covers rules, async write, new-process load and Widget Blueprint
+button-event execution. Untouched starter uses -Baseline for scaffolding only.
+
+Manual save: Saved/SaveGames/Week07_Backpack.sav
+R resets memory; V/I/F construct test objects and do not edit this manual file.
+Save completion is explicit. Load is explicit after relaunch.
+Workbook PDF pages 14 and 15 contain the paired activity and individual lab.
+
+STUDENT STARTER: the four persistence LAB blocks in BackpackState.cpp are intentionally unfinished. Build before editing; run Verify.ps1 -Baseline only for scaffold verification. After completing all four blocks, rebuild and run without -Baseline.
