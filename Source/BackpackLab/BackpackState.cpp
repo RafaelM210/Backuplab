@@ -60,15 +60,70 @@ void UBackpackState::SetCheckpoint(FName Id) {
  if(Id==TEXT("Start") || Id==TEXT("LabDoor")) {Checkpoint=Id;OnInventoryChanged.Broadcast();SetStatus(TEXT("Checkpoint changed in memory."));}
 }
 UBackpackSave* UBackpackState::BuildSnapshot() {
- // LAB 1 BEGIN
- // TODO: complete this workbook lab block. See the lecture notes.
- SetStatus(TEXT("LAB 1 unfinished: implement snapshot builder.")); return nullptr;
- // LAB 1 END
-}
+        // LAB 1 BEGIN
+        UBackpackSave* Snapshot = NewObject<UBackpackSave>(this);
+
+        Snapshot->SaveVersion = 2;
+        Snapshot->CheckpointId = Checkpoint;
+        Snapshot->Inventory = Entries;
+
+        SetStatus(TEXT("Snapshot created successfully."));
+        return Snapshot;
+        // LAB 1 END
+    }
 bool UBackpackState::ValidateAndMigrate(const UBackpackSave* Input,TArray<FInventoryEntry>& Out,FName& OutCheckpoint,FString& Error) const {
  // LAB 2 BEGIN
- // TODO: complete this workbook lab block. See the lecture notes.
- Error=TEXT("LAB 2 unfinished: implement validation and v1 migration."); return false;
+    if (!Input)
+    {
+        Error = TEXT("Rejected: save data is null.");
+        return false;
+    }
+    if (Input->SaveVersion != 1 && Input->SaveVersion != 2)
+    {
+        Error = TEXT("Rejected: unsupported save version.");
+        return false;
+    }
+    if (!ValidateCatalog(Error))
+    {
+        return false;
+    }
+    if (Input->Inventory.Num() > 2)
+    {
+        Error = TEXT("Rejected: too many inventory entries.");
+        return false;
+    }
+    TArray<FInventoryEntry> Candidate;
+    TSet<FName> Seen;
+    for (const auto& Entry : Input->Inventory)
+    {
+        const UItemDefinition* Definition = FindDefinition(Entry.ItemId);
+        if (!Definition || Seen.Contains(Entry.ItemId))
+        {
+            Error = TEXT("Rejected: unknown or duplicate item ID.");
+            return false;
+        }
+        if (Entry.Quantity <= 0 || Entry.Quantity > Definition->MaxStack)
+        {
+            Error = TEXT("Rejected: invalid item quantity.");
+            return false;
+        }
+        Seen.Add(Entry.ItemId);
+        Candidate.Add(Entry);
+    }
+    FName CandidateCheckpoint = TEXT("Start");
+    if (Input->SaveVersion == 2)
+    {
+        if (Input->CheckpointId != TEXT("Start") &&
+            Input->CheckpointId != TEXT("LabDoor"))
+        {
+            Error = TEXT("Rejected: unknown checkpoint.");
+            return false;
+        }
+        CandidateCheckpoint = Input->CheckpointId;
+    }
+    Out = MoveTemp(Candidate);
+    OutCheckpoint = CandidateCheckpoint;
+    return true;
  // LAB 2 END
 }
 bool UBackpackState::ApplySnapshot(const UBackpackSave* Input) {
@@ -79,8 +134,48 @@ bool UBackpackState::ApplySnapshot(const UBackpackSave* Input) {
 }
 bool UBackpackState::Save() {
  // LAB 3 BEGIN
- // TODO: complete this workbook lab block. See the lecture notes.
- SetStatus(TEXT("LAB 3 unfinished: implement asynchronous save.")); return false;
+    if (bSaving)
+    {
+        SetStatus(TEXT("Save rejected: another write is pending."));
+        return false;
+    }
+    PendingSave = BuildSnapshot();
+    if (!PendingSave)
+    {
+        SetStatus(TEXT("Save failed: could not build snapshot."));
+        return false;
+    }
+    TArray<FInventoryEntry> CheckedEntries;
+    FName CheckedCheckpoint;
+    FString Error;
+    if (!ValidateAndMigrate(PendingSave, CheckedEntries, CheckedCheckpoint, Error))
+    {
+        PendingSave = nullptr;
+        SetStatus(Error);
+        return false;
+    }
+    if (UGameplayStatics::DoesSaveGameExist(Slot, 0))
+    {
+        UBackpackSave* Existing = Cast<UBackpackSave>(
+            UGameplayStatics::LoadGameFromSlot(Slot, 0));
+        if (!Existing ||
+            !ValidateAndMigrate(Existing, CheckedEntries, CheckedCheckpoint, Error))
+        {
+            PendingSave = nullptr;
+            SetStatus(TEXT("Save rejected: existing save is invalid or unsupported."));
+            return false;
+        }
+    }
+    bSaving = true;
+    SetStatus(TEXT("Saving..."));
+
+    UGameplayStatics::AsyncSaveGameToSlot(
+        PendingSave,
+        Slot,
+        0,
+        FAsyncSaveGameToSlotDelegate::CreateUObject(
+            this, &UBackpackState::SaveFinished));
+    return true;
  // LAB 3 END
 }
 void UBackpackState::SaveFinished(const FString& Name,int32 User,bool bSuccess) {
@@ -94,8 +189,25 @@ void UBackpackState::SaveFinished(const FString& Name,int32 User,bool bSuccess) 
 }
 bool UBackpackState::Load() {
  // LAB 4 BEGIN
- // TODO: complete this workbook lab block. See the lecture notes.
- SetStatus(TEXT("LAB 4 unfinished: implement safe load.")); return false;
+    if (bSaving)
+    {
+        SetStatus(TEXT("Load rejected: save is still in progress."));
+        return false;
+    }
+    if (!UGameplayStatics::DoesSaveGameExist(Slot, 0))
+    {
+        Defaults();
+        SetStatus(TEXT("No save found. Default inventory loaded."));
+        return true;
+    }
+    USaveGame* LoadedObject = UGameplayStatics::LoadGameFromSlot(Slot, 0);
+    UBackpackSave* LoadedSave = Cast<UBackpackSave>(LoadedObject);
+    if (!LoadedSave)
+    {
+        SetStatus(TEXT("Load failed: invalid save file."));
+        return false;
+    }
+    return ApplySnapshot(LoadedSave);
  // LAB 4 END
 }
 void UBackpackState::Fixture(int32 Kind) {
